@@ -6,6 +6,7 @@ import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import net.minecraft.server.MinecraftServer;
+import org.stevefal.megarandomizer.gamerules.MegaGameRules;
 import org.stevefal.megarandomizer.megadrops.RandomDrops;
 
 @Mod(modid = MegaRandomizer1_7_10.MODID, version = MegaRandomizer1_7_10.VERSION)
@@ -23,6 +24,9 @@ public class MegaRandomizer1_7_10
 
     @EventHandler
     public void onServerReady(FMLServerStartedEvent event) {
+
+        MegaGameRules.register();
+
         RandomDrops.makeMegaItemLists(MinecraftServer.getServer().getEntityWorld().getSeed());
     }
 }
