@@ -55,9 +55,6 @@ public class RandomDrops {
             "minecraft:spawn_egg",
             "minecraft:water",
             "minecraft:monster_egg",
-            "minecraft:mob_spawner",
-            "minecraft:potatoes",
-            "minecraft:cocoa",
-            "minecraft:carrots"
+            "minecraft:mob_spawner"
     };
 }
