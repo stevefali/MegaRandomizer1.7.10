@@ -1,6 +1,7 @@
 package org.stevefal.megarandomizer.megadrops;
 
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 
 import java.util.*;
 
@@ -25,6 +26,19 @@ public class RandomDrops {
         Collections.shuffle(shuffledList, new Random(gameSeed));
     }
 
+    public static Item getRandomizedItem(ItemStack vanillaItem) {
+        if (masterList != null) {
+            int index = masterList.indexOf(vanillaItem.getItem());
+
+            if (index == -1) {
+                return vanillaItem.getItem();
+            } else {
+                return shuffledList.get(index);
+            }
+        } else {
+            return vanillaItem.getItem();
+        }
+    }
 
     private static final String[] excludeItems = {
             "minecraft:flowing_lava",
@@ -41,7 +55,9 @@ public class RandomDrops {
             "minecraft:spawn_egg",
             "minecraft:water",
             "minecraft:monster_egg",
-            "minecraft:mob_spawner"
+            "minecraft:mob_spawner",
+            "minecraft:potatoes",
+            "minecraft:cocoa",
+            "minecraft:carrots"
     };
-
 }
