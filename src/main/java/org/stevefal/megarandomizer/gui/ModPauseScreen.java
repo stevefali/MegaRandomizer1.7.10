@@ -85,7 +85,7 @@ public class ModPauseScreen extends GuiScreen {
                 FMLClientHandler.instance().showInGameModOptions(this.normalMenu);
                 break;
             case 14:
-
+                this.mc.displayGuiScreen(new MegaRandomOptionsScreen(this, this.mc.theWorld));
                 break;
         }
 

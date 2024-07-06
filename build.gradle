@@ -20,7 +20,7 @@ dependencies {
 
 apply plugin: 'forge'
 
-version = "1.0-1.7.10"
+version = "1.1-1.7.10"
 group= "org.stevefal.megarandomizer1_7_10" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = "megarandomizer1_7_10"
 
