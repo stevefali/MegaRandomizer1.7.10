@@ -2,7 +2,7 @@
 {
   "modid": "megarandomizer1_7_10",
   "name": "Mega Randomizer 1.7.10",
-  "description": "Mega Randomizer \nThe customizable randomizer for Minecraft! \n* Choose whether to randomize drops from blocks, mobs, players, or all three! \n* More randomizations to come in future releases!",
+  "description": "Mega Randomizer \nThe customizable randomizer for Minecraft! \n* Choose whether to randomize drops from blocks, mobs, players, or all three! \n* More randomizations to come in future releases.",
   "version": "${version}",
   "mcversion": "${mcversion}",
   "url": "",
