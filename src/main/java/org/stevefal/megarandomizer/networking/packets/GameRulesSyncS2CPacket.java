@@ -7,6 +7,7 @@ import io.netty.buffer.ByteBuf;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.WorldClient;
 import net.minecraft.world.World;
+import org.stevefal.megarandomizer.gamerules.MegaGameRules;
 
 public class GameRulesSyncS2CPacket implements IMessage {
 
@@ -41,6 +42,9 @@ public class GameRulesSyncS2CPacket implements IMessage {
         @Override
         public IMessage onMessage(GameRulesSyncS2CPacket gameRulesSyncS2CPacket, MessageContext messageContext) {
             WorldClient worldClient = Minecraft.getMinecraft().theWorld;
+            worldClient.getGameRules().setOrCreateGameRule(MegaGameRules.RULE_DO_BLOCK_RANDOM_DROPS, String.valueOf(gameRulesSyncS2CPacket.isDoBlockRandomDrops));
+            worldClient.getGameRules().setOrCreateGameRule(MegaGameRules.RULE_DO_ENTITY_RANDOM_DROPS, String.valueOf(gameRulesSyncS2CPacket.isDoEntityRandomDrops));
+            worldClient.getGameRules().setOrCreateGameRule(MegaGameRules.RULE_DO_PLAYER_RANDOM_DROPS, String.valueOf(gameRulesSyncS2CPacket.isDoPlayerRandomDrops));
 
 
             return null;
