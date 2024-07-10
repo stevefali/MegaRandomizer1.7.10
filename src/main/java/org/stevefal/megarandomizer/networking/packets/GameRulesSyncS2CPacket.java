@@ -6,7 +6,6 @@ import cpw.mods.fml.common.network.simpleimpl.MessageContext;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.WorldClient;
-import net.minecraft.world.World;
 import org.stevefal.megarandomizer.gamerules.MegaGameRules;
 
 public class GameRulesSyncS2CPacket implements IMessage {

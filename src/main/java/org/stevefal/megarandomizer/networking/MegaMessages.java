@@ -7,6 +7,7 @@ import cpw.mods.fml.relauncher.Side;
 import net.minecraft.entity.player.EntityPlayerMP;
 import org.stevefal.megarandomizer.MegaRandomizer1_7_10;
 import org.stevefal.megarandomizer.networking.packets.GameRulesSyncS2CPacket;
+import org.stevefal.megarandomizer.networking.packets.RequestGameRulesSyncC2SPacket;
 import org.stevefal.megarandomizer.networking.packets.SetGameRulesC2SPacket;
 
 public class MegaMessages {
@@ -24,6 +25,7 @@ public class MegaMessages {
 
         /* To Server */
         netReg.registerMessage(SetGameRulesC2SPacket.Handler.class, SetGameRulesC2SPacket.class, id(), Side.SERVER);
+        netReg.registerMessage(RequestGameRulesSyncC2SPacket.Handler.class, RequestGameRulesSyncC2SPacket.class, id(), Side.SERVER);
 
 
         /* To Client */
