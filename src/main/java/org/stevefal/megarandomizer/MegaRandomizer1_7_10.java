@@ -10,6 +10,7 @@ import org.stevefal.megarandomizer.event.ClientEvents;
 import org.stevefal.megarandomizer.event.ServerEvents;
 import org.stevefal.megarandomizer.gamerules.MegaGameRules;
 import org.stevefal.megarandomizer.megadrops.RandomDrops;
+import org.stevefal.megarandomizer.networking.MegaMessages;
 
 @Mod(modid = MegaRandomizer1_7_10.MODID, version = MegaRandomizer1_7_10.VERSION)
 public class MegaRandomizer1_7_10
@@ -22,6 +23,8 @@ public class MegaRandomizer1_7_10
 
         MinecraftForge.EVENT_BUS.register(new ServerEvents());
         MinecraftForge.EVENT_BUS.register(new ClientEvents());
+
+        MegaMessages.register();
     }
 
 

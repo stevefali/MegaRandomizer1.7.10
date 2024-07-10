@@ -5,6 +5,8 @@ import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.multiplayer.WorldClient;
 import org.stevefal.megarandomizer.gamerules.MegaGameRules;
+import org.stevefal.megarandomizer.networking.MegaMessages;
+import org.stevefal.megarandomizer.networking.packets.SetGameRulesC2SPacket;
 
 public class MegaRandomOptionsScreen extends GuiScreen {
 
@@ -32,20 +34,41 @@ public class MegaRandomOptionsScreen extends GuiScreen {
                 getButtonString(MegaGameRules.RULE_DO_PLAYER_RANDOM_DROPS, "Player")));
 
         this.buttonList.add(new GuiButton(4, this.width / 2 - 100, this.height / 4 + 96 - b0, "Done"));
+
     }
 
 
     protected void actionPerformed(GuiButton button) {
         switch (button.id) {
             case 0:
-                System.out.println("Test button clicked!!");
                 // Blocks
+                WORLD.getGameRules().setOrCreateGameRule(MegaGameRules.RULE_DO_BLOCK_RANDOM_DROPS,
+                        String.valueOf(!WORLD.getGameRules().getGameRuleBooleanValue(MegaGameRules.RULE_DO_BLOCK_RANDOM_DROPS)));
+                initGui();
+                MegaMessages.sendToServer(new SetGameRulesC2SPacket(
+                        WORLD.getGameRules().getGameRuleBooleanValue(MegaGameRules.RULE_DO_BLOCK_RANDOM_DROPS),
+                        WORLD.getGameRules().getGameRuleBooleanValue(MegaGameRules.RULE_DO_ENTITY_RANDOM_DROPS),
+                        WORLD.getGameRules().getGameRuleBooleanValue(MegaGameRules.RULE_DO_PLAYER_RANDOM_DROPS)));
                 break;
             case 1:
                 // Entities
+                WORLD.getGameRules().setOrCreateGameRule(MegaGameRules.RULE_DO_ENTITY_RANDOM_DROPS,
+                        String.valueOf(!WORLD.getGameRules().getGameRuleBooleanValue(MegaGameRules.RULE_DO_ENTITY_RANDOM_DROPS)));
+                initGui();
+                MegaMessages.sendToServer(new SetGameRulesC2SPacket(
+                        WORLD.getGameRules().getGameRuleBooleanValue(MegaGameRules.RULE_DO_BLOCK_RANDOM_DROPS),
+                        WORLD.getGameRules().getGameRuleBooleanValue(MegaGameRules.RULE_DO_ENTITY_RANDOM_DROPS),
+                        WORLD.getGameRules().getGameRuleBooleanValue(MegaGameRules.RULE_DO_PLAYER_RANDOM_DROPS)));
                 break;
             case 2:
                 // Players
+                WORLD.getGameRules().setOrCreateGameRule(MegaGameRules.RULE_DO_PLAYER_RANDOM_DROPS,
+                        String.valueOf(!WORLD.getGameRules().getGameRuleBooleanValue(MegaGameRules.RULE_DO_PLAYER_RANDOM_DROPS)));
+                initGui();
+                MegaMessages.sendToServer(new SetGameRulesC2SPacket(
+                        WORLD.getGameRules().getGameRuleBooleanValue(MegaGameRules.RULE_DO_BLOCK_RANDOM_DROPS),
+                        WORLD.getGameRules().getGameRuleBooleanValue(MegaGameRules.RULE_DO_ENTITY_RANDOM_DROPS),
+                        WORLD.getGameRules().getGameRuleBooleanValue(MegaGameRules.RULE_DO_PLAYER_RANDOM_DROPS)));
                 break;
             case 3:
             case 4:
@@ -55,7 +78,7 @@ public class MegaRandomOptionsScreen extends GuiScreen {
     }
 
     private String getButtonString(String megaGameRule, String ruleName) {
-        boolean ruleValue = this.WORLD.getGameRules().getGameRuleBooleanValue(megaGameRule);
+        boolean ruleValue = WORLD.getGameRules().getGameRuleBooleanValue(megaGameRule);
         String onOff = ruleValue ? "ON" : "Off";
         return "Randomize " + ruleName + " Drops: " + onOff;
     }
