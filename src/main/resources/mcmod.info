@@ -5,11 +5,11 @@
   "description": "Mega Randomizer \nThe customizable randomizer for Minecraft! \n* Choose whether to randomize drops from blocks, mobs, players, or all three! \n* More randomizations to come in future releases.",
   "version": "${version}",
   "mcversion": "${mcversion}",
-  "url": "",
+  "url": "https://www.curseforge.com/minecraft/mc-mods/mega-randomizer",
   "updateUrl": "",
   "authorList": ["Steven Faliszewski"],
   "credits": "",
-  "logoFile": "",
+  "logoFile": "assets/MegaRandomizerLogo.png",
   "screenshots": [],
   "dependencies": []
 }
