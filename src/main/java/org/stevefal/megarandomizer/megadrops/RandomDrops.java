@@ -1,50 +1,54 @@
 package org.stevefal.megarandomizer.megadrops;
 
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
 import java.util.*;
 
 public class RandomDrops {
 
-    private static ArrayList<Item> masterList;
-    private static ArrayList<Item> shuffledList;
+    private static ArrayList<ItemStack> masterList;
+    private static ArrayList<ItemStack> shuffledList;
 
 
     public static void makeMegaItemLists(long gameSeed) {
-        Set registeredItems = Item.itemRegistry.getKeys();
 
-        masterList = new ArrayList<Item>();
+        masterList = new ArrayList<ItemStack>();
+        masterList.addAll(MegaItemRegistry.createMegaItemList(excludeItems));
 
-        for (Object registeredItem : registeredItems) {
-            if (!Arrays.asList(excludeItems).contains(registeredItem.toString())) {
-                masterList.add((Item) Item.itemRegistry.getObject(registeredItem));
-            }
-        }
-
-        shuffledList = new ArrayList<Item>(masterList);
+        shuffledList = new ArrayList<ItemStack>(masterList);
         Collections.shuffle(shuffledList, new Random(gameSeed));
     }
 
-    public static Item getRandomizedItem(ItemStack vanillaItem) {
+    public static ItemStack getRandomizedItem(ItemStack vanillaItem) {
         if (masterList != null) {
-            int index = masterList.indexOf(vanillaItem.getItem());
+            int index = getMasterListIndex(vanillaItem);
 
             if (index == -1) {
-                return vanillaItem.getItem();
+                return vanillaItem;
             } else {
                 return shuffledList.get(index);
             }
         } else {
-            return vanillaItem.getItem();
+            return vanillaItem;
         }
     }
 
+    private static int getMasterListIndex(ItemStack itemStack){
+        for (int i = 0; i < masterList.size(); i++) {
+            if (ItemStack.areItemStacksEqual(itemStack, masterList.get(i))) {
+                return i;
+            }
+        }
+        return -1;
+    }
+
     private static final String[] excludeItems = {
+            "minecraft:air",
             "minecraft:flowing_lava",
             "minecraft:flowing_water",
             "minecraft:end_portal",
             "minecraft:command_block",
+            "minecraft:command_block_mine_cart",
             "minecraft:lava",
             "minecraft:lit_furnace",
             "minecraft:farmland",
@@ -54,7 +58,7 @@ public class RandomDrops {
             "minecraft:portal",
             "minecraft:spawn_egg",
             "minecraft:water",
-            "minecraft:monster_egg",
-            "minecraft:mob_spawner"
+            "minecraft:mob_spawner",
+            "minecraft:redstone_wire"
     };
 }
