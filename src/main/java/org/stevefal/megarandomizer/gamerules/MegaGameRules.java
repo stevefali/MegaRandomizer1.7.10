@@ -1,7 +1,6 @@
 package org.stevefal.megarandomizer.gamerules;
 
 import cpw.mods.fml.common.FMLCommonHandler;
-import net.minecraft.server.MinecraftServer;
 import net.minecraft.world.GameRules;
 
 
@@ -15,7 +14,6 @@ public class MegaGameRules {
 
 
     public static void register() {
-//        GameRules gameRules = MinecraftServer.getServer().getEntityWorld().getGameRules();
         GameRules gameRules = FMLCommonHandler.instance().getMinecraftServerInstance().getEntityWorld().getGameRules();
 
 
