@@ -8,3 +8,4 @@ Blocks, Entities or Players. (More to come in future versions!)
 ### The repositories for the other versions of Mega Randomizer can be found here:
 - [Main version](https://github.com/stevefali/MegaRandomizer)
 - [1.16.5](https://github.com/stevefali/MegaRandomizer1.16.5)
+- [1.12.10](https://github.com/stevefali/MegaRandomizer1.12.10)
