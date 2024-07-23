@@ -16,8 +16,8 @@ public class ClientEvents {
     @SubscribeEvent
     public void onPauseMenuTriggered(GuiScreenEvent.InitGuiEvent event) {
         MegaMessages.sendToServer(new RequestGameRulesSyncC2SPacket());
-        if (event.gui instanceof GuiIngameMenu) {
-            Minecraft.getMinecraft().displayGuiScreen(new ModPauseScreen((GuiIngameMenu) event.gui));
+        if (event.gui instanceof GuiIngameMenu && !(event.gui instanceof ModPauseScreen)) {
+            Minecraft.getMinecraft().displayGuiScreen(new ModPauseScreen());
         }
     }
 }
