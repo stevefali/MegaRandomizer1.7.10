@@ -26,13 +26,4 @@ public class ModPauseScreen extends GuiIngameMenu {
             this.mc.displayGuiScreen(new MegaRandomOptionsScreen(this, this.mc.theWorld));
         }
     }
-
-    public void updateScreen() {
-        super.updateScreen();
-    }
-
-    public void drawScreen(int val_1, int val_2, float val_3) {
-        super.drawScreen(val_1, val_2, val_3);
-    }
-
 }
