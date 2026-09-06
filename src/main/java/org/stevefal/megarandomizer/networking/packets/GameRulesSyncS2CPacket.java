@@ -13,12 +13,14 @@ public class GameRulesSyncS2CPacket implements IMessage {
     private boolean isDoBlockRandomDrops;
     private boolean isDoEntityRandomDrops;
     private boolean isDoPlayerRandomDrops;
+    private boolean isDoVolatileDrops;
     public GameRulesSyncS2CPacket(){}
 
-    public GameRulesSyncS2CPacket(boolean isDoBlocks, boolean isDoEntities, boolean isDoPlayer) {
+    public GameRulesSyncS2CPacket(boolean isDoBlocks, boolean isDoEntities, boolean isDoPlayer, boolean isDoVolatile) {
         this.isDoBlockRandomDrops = isDoBlocks;
         this.isDoEntityRandomDrops = isDoEntities;
         this.isDoPlayerRandomDrops = isDoPlayer;
+        this.isDoVolatileDrops = isDoVolatile;
     }
 
     @Override
@@ -26,6 +28,7 @@ public class GameRulesSyncS2CPacket implements IMessage {
         this.isDoBlockRandomDrops = byteBuf.readBoolean();
         this.isDoEntityRandomDrops = byteBuf.readBoolean();
         this.isDoPlayerRandomDrops = byteBuf.readBoolean();
+        this.isDoVolatileDrops = byteBuf.readBoolean();
     }
 
     @Override
@@ -33,6 +36,7 @@ public class GameRulesSyncS2CPacket implements IMessage {
         byteBuf.writeBoolean(isDoBlockRandomDrops);
         byteBuf.writeBoolean(isDoEntityRandomDrops);
         byteBuf.writeBoolean(isDoPlayerRandomDrops);
+        byteBuf.writeBoolean(isDoVolatileDrops);
     }
 
     public static class Handler implements IMessageHandler<GameRulesSyncS2CPacket, IMessage> {
@@ -44,6 +48,7 @@ public class GameRulesSyncS2CPacket implements IMessage {
             worldClient.getGameRules().setOrCreateGameRule(MegaGameRules.RULE_DO_BLOCK_RANDOM_DROPS, String.valueOf(gameRulesSyncS2CPacket.isDoBlockRandomDrops));
             worldClient.getGameRules().setOrCreateGameRule(MegaGameRules.RULE_DO_ENTITY_RANDOM_DROPS, String.valueOf(gameRulesSyncS2CPacket.isDoEntityRandomDrops));
             worldClient.getGameRules().setOrCreateGameRule(MegaGameRules.RULE_DO_PLAYER_RANDOM_DROPS, String.valueOf(gameRulesSyncS2CPacket.isDoPlayerRandomDrops));
+            worldClient.getGameRules().setOrCreateGameRule(MegaGameRules.RULE_DO_VOLATILE_DROPS, String.valueOf(gameRulesSyncS2CPacket.isDoVolatileDrops));
 
 
             return null;

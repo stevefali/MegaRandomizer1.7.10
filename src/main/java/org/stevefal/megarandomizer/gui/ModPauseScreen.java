@@ -3,6 +3,8 @@ package org.stevefal.megarandomizer.gui;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.gui.*;
+import org.stevefal.megarandomizer.networking.MegaMessages;
+import org.stevefal.megarandomizer.networking.packets.RequestGameRulesSyncC2SPacket;
 
 @SideOnly(Side.CLIENT)
 public class ModPauseScreen extends GuiIngameMenu {
@@ -12,6 +14,7 @@ public class ModPauseScreen extends GuiIngameMenu {
 
     @SuppressWarnings("unchecked")
     public void initGui() {
+        getUpdateFromServer();
         super.initGui();
         GuiButton backButton = (GuiButton) this.buttonList.get(0);
         backButton.yPosition = this.height / 4 + 144 - 16;
@@ -25,5 +28,9 @@ public class ModPauseScreen extends GuiIngameMenu {
         if (button.id == 14) {
             this.mc.displayGuiScreen(new MegaRandomOptionsScreen(this, this.mc.theWorld));
         }
+    }
+
+    private void getUpdateFromServer() {
+        MegaMessages.sendToServer(new RequestGameRulesSyncC2SPacket());
     }
 }

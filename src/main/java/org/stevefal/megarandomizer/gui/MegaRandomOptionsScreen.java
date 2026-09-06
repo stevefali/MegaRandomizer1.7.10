@@ -16,6 +16,7 @@ public class MegaRandomOptionsScreen extends GuiScreen {
     private final String BLOCKS = "Randomize Block Drops: ";
     private final String ENTITIES = "Randomize Entity Drops: ";
     private final String PLAYERS = "Randomize Player Drops: ";
+    private final String VOLATILE = "Volatile Drops: ";
 
     public MegaRandomOptionsScreen(ModPauseScreen modPauseScreen, WorldClient worldClient) {
         this.MOD_PAUSE_SCREEN = modPauseScreen;
@@ -33,8 +34,11 @@ public class MegaRandomOptionsScreen extends GuiScreen {
                 getButtonString(MegaGameRules.RULE_DO_ENTITY_RANDOM_DROPS, ENTITIES)));
         this.buttonList.add(new GuiButton(2, this.width / 2 - 100, this.height / 4 + 72 + b0,
                 getButtonString(MegaGameRules.RULE_DO_PLAYER_RANDOM_DROPS, PLAYERS)));
+        this.buttonList.add(new GuiButton(3, this.width / 2 - 100, this.height / 4 + 96 + b0,
+                getButtonString(MegaGameRules.RULE_DO_VOLATILE_DROPS, VOLATILE)));
 
-        this.buttonList.add(new GuiButton(4, this.width / 2 - 100, this.height / 4 + 96 - b0, "Done"));
+
+        this.buttonList.add(new GuiButton(4, this.width / 2 - 100, this.height / 4 + 120 - b0, "Done"));
 
     }
 
@@ -51,6 +55,10 @@ public class MegaRandomOptionsScreen extends GuiScreen {
             case 2:
                 // Players
                 setRule(MegaGameRules.RULE_DO_PLAYER_RANDOM_DROPS);
+                break;
+            case 3:
+                // Volatile
+                setRule(MegaGameRules.RULE_DO_VOLATILE_DROPS);
                 break;
             case 4:
                 Minecraft.getMinecraft().displayGuiScreen(this.MOD_PAUSE_SCREEN);
@@ -75,11 +83,14 @@ public class MegaRandomOptionsScreen extends GuiScreen {
         MegaMessages.sendToServer(new SetGameRulesC2SPacket(
                 WORLD.getGameRules().getGameRuleBooleanValue(MegaGameRules.RULE_DO_BLOCK_RANDOM_DROPS),
                 WORLD.getGameRules().getGameRuleBooleanValue(MegaGameRules.RULE_DO_ENTITY_RANDOM_DROPS),
-                WORLD.getGameRules().getGameRuleBooleanValue(MegaGameRules.RULE_DO_PLAYER_RANDOM_DROPS)));
+                WORLD.getGameRules().getGameRuleBooleanValue(MegaGameRules.RULE_DO_PLAYER_RANDOM_DROPS),
+                WORLD.getGameRules().getGameRuleBooleanValue(MegaGameRules.RULE_DO_VOLATILE_DROPS)));
     }
 
     public void updateScreen() {
+        initGui();
         super.updateScreen();
+
     }
 
 

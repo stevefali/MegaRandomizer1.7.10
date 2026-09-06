@@ -21,7 +21,10 @@ public class ServerEvents {
             ArrayList<ItemStack> randomizedDrops = new ArrayList<ItemStack>();
             for (ItemStack vanillaDrop : event.drops) {
                 for (int i = 0; i < vanillaDrop.stackSize; i++) {
-                    randomizedDrops.add(ItemStack.copyItemStack(RandomDrops.getRandomizedItem(vanillaDrop)));
+                    randomizedDrops.add(ItemStack.copyItemStack(RandomDrops.getRandomizedItem(
+                            vanillaDrop,
+                            event.world.getGameRules().getGameRuleBooleanValue(MegaGameRules.RULE_DO_VOLATILE_DROPS)
+                    )));
                 }
             }
             event.drops.clear();
@@ -49,7 +52,10 @@ public class ServerEvents {
         ArrayList<EntityItem> randomizedDrops = new ArrayList<EntityItem>();
         for (EntityItem vanillaDrop : event.drops) {
             for (int i = 0; i < vanillaDrop.getEntityItem().stackSize; i++) {
-                randomizedDrops.add(new EntityItem(world, ent.posX, ent.posY, ent.posZ, ItemStack.copyItemStack(RandomDrops.getRandomizedItem(vanillaDrop.getEntityItem()))));
+                randomizedDrops.add(new EntityItem(world, ent.posX, ent.posY, ent.posZ, ItemStack.copyItemStack(RandomDrops.getRandomizedItem(
+                        vanillaDrop.getEntityItem(),
+                        world.getGameRules().getGameRuleBooleanValue(MegaGameRules.RULE_DO_VOLATILE_DROPS)
+                ))));
             }
         }
         event.drops.clear();

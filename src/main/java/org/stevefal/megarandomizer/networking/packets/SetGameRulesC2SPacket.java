@@ -13,14 +13,16 @@ public class SetGameRulesC2SPacket implements IMessage {
     private boolean isDoBlockRandomDrops;
     private boolean isDoEntityRandomDrops;
     private boolean isDoPlayerRandomDrops;
+    private boolean isDoVolatileDrops;
 
     public SetGameRulesC2SPacket() {
     }
 
-    public SetGameRulesC2SPacket(boolean isDoBlockRandomDrops, boolean isDoEntityRandomDrops, boolean isDoPlayerRandomDrops) {
+    public SetGameRulesC2SPacket(boolean isDoBlockRandomDrops, boolean isDoEntityRandomDrops, boolean isDoPlayerRandomDrops, boolean isDoVolatileDrops) {
         this.isDoBlockRandomDrops = isDoBlockRandomDrops;
         this.isDoEntityRandomDrops = isDoEntityRandomDrops;
         this.isDoPlayerRandomDrops = isDoPlayerRandomDrops;
+        this.isDoVolatileDrops = isDoVolatileDrops;
     }
 
 
@@ -29,6 +31,7 @@ public class SetGameRulesC2SPacket implements IMessage {
         this.isDoBlockRandomDrops = byteBuf.readBoolean();
         this.isDoEntityRandomDrops = byteBuf.readBoolean();
         this.isDoPlayerRandomDrops = byteBuf.readBoolean();
+        this.isDoVolatileDrops = byteBuf.readBoolean();
 
     }
 
@@ -37,6 +40,7 @@ public class SetGameRulesC2SPacket implements IMessage {
         byteBuf.writeBoolean(isDoBlockRandomDrops);
         byteBuf.writeBoolean(isDoEntityRandomDrops);
         byteBuf.writeBoolean(isDoPlayerRandomDrops);
+        byteBuf.writeBoolean(isDoVolatileDrops);
     }
 
     public static class Handler implements IMessageHandler<SetGameRulesC2SPacket, IMessage> {
@@ -47,9 +51,10 @@ public class SetGameRulesC2SPacket implements IMessage {
             world.getGameRules().setOrCreateGameRule(MegaGameRules.RULE_DO_BLOCK_RANDOM_DROPS, String.valueOf(setGameRulesC2SPacket.isDoBlockRandomDrops));
             world.getGameRules().setOrCreateGameRule(MegaGameRules.RULE_DO_ENTITY_RANDOM_DROPS, String.valueOf(setGameRulesC2SPacket.isDoEntityRandomDrops));
             world.getGameRules().setOrCreateGameRule(MegaGameRules.RULE_DO_PLAYER_RANDOM_DROPS, String.valueOf(setGameRulesC2SPacket.isDoPlayerRandomDrops));
+            world.getGameRules().setOrCreateGameRule(MegaGameRules.RULE_DO_VOLATILE_DROPS, String.valueOf(setGameRulesC2SPacket.isDoVolatileDrops));
 
             MegaMessages.sendToPlayer(new GameRulesSyncS2CPacket(setGameRulesC2SPacket.isDoBlockRandomDrops,
-                            setGameRulesC2SPacket.isDoEntityRandomDrops, setGameRulesC2SPacket.isDoPlayerRandomDrops),
+                            setGameRulesC2SPacket.isDoEntityRandomDrops, setGameRulesC2SPacket.isDoPlayerRandomDrops, setGameRulesC2SPacket.isDoVolatileDrops),
                     messageContext.getServerHandler().playerEntity);
 
             return null;

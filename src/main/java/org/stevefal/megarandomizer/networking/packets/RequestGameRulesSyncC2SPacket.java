@@ -28,7 +28,8 @@ public class RequestGameRulesSyncC2SPacket implements IMessage {
             GameRules gameRules = messageContext.getServerHandler().playerEntity.getEntityWorld().getGameRules();
             MegaMessages.sendToPlayer(new GameRulesSyncS2CPacket(gameRules.getGameRuleBooleanValue(MegaGameRules.RULE_DO_BLOCK_RANDOM_DROPS),
                     gameRules.getGameRuleBooleanValue(MegaGameRules.RULE_DO_ENTITY_RANDOM_DROPS),
-                    gameRules.getGameRuleBooleanValue(MegaGameRules.RULE_DO_PLAYER_RANDOM_DROPS)), messageContext.getServerHandler().playerEntity);
+                    gameRules.getGameRuleBooleanValue(MegaGameRules.RULE_DO_PLAYER_RANDOM_DROPS),
+                    gameRules.getGameRuleBooleanValue(MegaGameRules.RULE_DO_VOLATILE_DROPS)), messageContext.getServerHandler().playerEntity);
             return null;
         }
     }

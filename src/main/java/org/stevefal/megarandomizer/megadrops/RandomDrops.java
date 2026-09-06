@@ -19,9 +19,17 @@ public class RandomDrops {
         Collections.shuffle(shuffledList, new Random(gameSeed));
     }
 
-    public static ItemStack getRandomizedItem(ItemStack vanillaItem) {
+    public static ItemStack getRandomizedItem(ItemStack vanillaItem, boolean isDoVolatileDrops) {
         if (masterList != null) {
-            int index = getMasterListIndex(vanillaItem);
+            int index;
+
+            if (isDoVolatileDrops) {
+                Random rand = new Random();
+                int max = masterList.size();
+                index = rand.nextInt(max);
+            } else {
+                index = getMasterListIndex(vanillaItem);
+            }
 
             if (index == -1) {
                 return vanillaItem;
@@ -33,7 +41,7 @@ public class RandomDrops {
         }
     }
 
-    private static int getMasterListIndex(ItemStack itemStack){
+    private static int getMasterListIndex(ItemStack itemStack) {
         for (int i = 0; i < masterList.size(); i++) {
             if (ItemStack.areItemStacksEqual(itemStack, masterList.get(i))) {
                 return i;
